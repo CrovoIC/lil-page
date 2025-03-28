@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja-JP">
+
+  <head profile="http://www.w3.org/2005/10/profile">
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+    <link rel="icon" type="image/png" href="image/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="style1.css" media="screen"/>
+    <title>黒御霊の小さな名刺</title>
+  </head>
+
+  <body>
+
+    <h1 id="header">crovoic.net</h1>
+    <blockquote>
+      <p>
+        何かが起こることを期待していますか?
+      </p>
+    </blockquote>
+
+    <pre class="twilight"><span class="Comment">#!/usr/bin/env ruby</span>
+<span class="Comment"># encoding: utf-8
+
+# <a href="">Ruby Quiz #158 (link died, i think)</a></span>
+
+%w[ <span class="String">Class &lt;&lt;self Symbol</span> ].reverse.each{ |<span class="Variable">klass</span>|
+  <span class="Comment toggler" id="d18-toggle"># DIRTY 1.8 互換性</span>
+  <span id="d18"><span class="Keyword">def</span> <span class="Entity">public_send</span> <span class="Keyword">*</span>args
+    <span class="Storage">respond_to?</span>(args.first) <span class="Keyword">&amp;&amp;</span> send(<span class="Keyword">*</span>args)
+  <span class="Keyword">end</span> <span class="Keyword">unless</span> <span class="Storage">respond_to?</span>(<span class="Constant">:public_send</span>)</span>
+  <span class="Comment toggler" id="f18-toggle"># FULL 1.8 互換性</span>
+  <span id="f18"><span class="Keyword">def</span> <span class="Entity">public_send</span> <span class="Keyword">*</span>args
+    <span class="Keyword">if</span> <span class="Storage">respond_to?</span>(args.first)
+      send(<span class="Keyword">*</span>args)
+    <span class="Keyword">else</span>
+      msg <span class="Keyword">=</span> <span class="String">" `</span><span class="StringEmbeddedSource">\#</span><span class="String">{</span><span class="StringVariable">args.first</span><span class="String">}' called for </span><span class="StringEmbeddedSource">\#</span><span class="String">{</span><span class="StringVariable">inspect</span><span class="String">}:</span><span class="StringEmbeddedSource">\#</span><span class="String">{</span><span class="StringVariable">self.class</span><span class="String">}"</span>
+      <span class="Keyword">if</span> <span class="Storage">respond_to?</span>(args.first, true)
+        <span class="Keyword">raise</span> <span class="Support">NoMethodError</span>.<span class="Keyword">new</span>(  <span class="String">'private method'</span> <span class="Keyword">+</span> msg)
+      <span class="Keyword">else</span>
+        <span class="Keyword">raise</span> <span class="Support">NoMethodError</span>.<span class="Keyword">new</span>(<span class="String">'undefined method'</span> <span class="Keyword">+</span> msg)
+      <span class="Keyword">end</span>
+    end
+  <span class="Keyword">end if</span> <span class="Variable">RUBY_VERSION</span> <span class="Keyword">&lt;</span> <span class="String">'1.9.0'</span></span>
+  <span class="Comment toggler" id="rbx-jruby-toggle"># rubinus、jruby互換性 </span>
+  <span id="rbx-jruby"><span class="Keyword">def</span> <span class="Entity">to_proc</span>
+    msg <span class="Keyword">=</span> <span class="Variable">self</span>
+    lambda{ |<span class="Keyword">*</span><span class="Variable">args</span>| args.shift.public_send(msg, <span class="Keyword">*</span>args) }
+  <span class="Keyword">end</span></span>
+  eval <span class="String">&lt;&lt;-RUBY</span>.split(<span class="StringRegexp">/本当によくあること/</span>).join
+    <span class="Keyword">class</span> <span class="StringEmbeddedSource">#{klass}</span>
+      <span class="String">本当によくあること</span> define_method(<span class="Constant">:method_missing</span>, <span class="Keyword">&amp;</span><span class="Constant">:say</span>)
+    <span class="Keyword">end</span>
+<span class="String">  RUBY</span>
+}
+<span class="Support">Class</span>.send(<span class="Constant">:define_method</span>, <span class="Constant">:const_missing</span>,
+  <span class="Keyword">&amp;</span>lambda{ |<span class="Variable">c</span>| cry c.to_s[<span class="Constant">0</span>..<span class="Keyword">-</span><span class="Constant">2</span>] })
+<span class="Keyword">def</span> <span class="Entity">say</span> s <span class="Keyword">=</span> <span class="Constant">nil</span>
+  print s, <span class="String">'</span> <span class="String">'</span> <span class="Keyword">if</span> s
+  <span class="Variable">self</span>
+<span class="Keyword">end</span>
+<span class="Keyword">public</span> <span class="Constant">:say</span>
+sing <span class="Support">Hello</span>.<span class="Variable">World!</span>
+puts
+<span class="String">__END__</span>
+アパッチ教師 2.0
+</pre>
+
+    <div class="block">
+      ゲーマー。インターネットオタク。マルチファンダム。デベロッパー <br></br> <br></br>
+      Cogito, ergo sum.
+    </div>
+
+    <hr/>
+
+    <ul id="menu">
+      <li class="toggler" onclick="collapse_all()">伸ばす</li>
+      <li class="toggler" onclick="fold_all()">コンパクト</li>
+    </ul>
+
+    <h1 class="toggler" id="links-toggle">リンク：</h1>
+    <div class="block" id="links">
+      <h2>プロフィール</h2>
+      <ul>
+        <li>
+          <a href="http://crovoic.net/">バイオウェブサイト</a>
+        </li>
+      </ul>
+      <h2>SNS</h2>
+      <ul>
+        <li><a href="https://twitter.com/Kuro_Mitama">ツイッター</a></li>
+        <li><a href="https://bsky.app/profile/crovoic.net">ブルースカイ</a></li>
+        <li>LINE ID: crovoic</li>
+      </ul>
+    </div>
+
+    <h1 class="toggler" id="research-toggle">研究:</h1>
+    <div class="block" id="research">
+      <a class="toggler" onclick="fold_all()">△ 戻る</a>
+      <ul>
+        <li>繁体字中国語を勉強する（一時停止）</li>
+        <li>日本語を勉強する</li>
+        <li>ウェブサイト開発 (CSS アニメーション、HTML、JavaScript、またはその逆)</li>
+      </ul>
+    </div>
+
+    <h1 class="toggler" id="programming-languages-toggle">プログラミング言語:</h1>
+    <div class="block" id="programming-languages">
+      <a class="toggler" onclick="fold_all()">△ 戻る</a>
+      <ul>
+        <li>CSS - HTML</li>
+        <li>Javascript</li>
+        <li>Python (勉強する)</li>
+        <li>C++ (勉強する)</li>
+      </ul>
+    </div>
+
+    <h1 class="toggler" id="time-graphs-toggle">タイムライン:</h1>
+    <div class="block" id="time-graphs">
+      <a class="toggler" onclick="fold_all()">△ 戻る</a>
+      <ul>
+        <li>20?? ~ 現在: ホーチミン市、ベトナム</li>
+        <li>20?? ~ 未来: アメリカ合衆国</li>
+      </ul>
+    </div>
+
+    <h1 class="toggler" id="interests-toggle">興味:</h1>
+    <div class="block" id="interests">
+      <a class="toggler" onclick="fold_all()">△ 戻る</a>
+      <ul>
+        <li>game (ゲーム)</li>
+        <li>fumo</li>
+        <li>programming (プログラミング)</li>
+        <li>arts and literature (芸術と文学)</li>
+        <li>philosophy (哲学)</li>
+      </ul>
+    </div>
+
+      <h2 class="toggler" id="games-toggle">ゲーム:</h2>
+      <div class="block" id="games">
+        <ul>
+          <li>ルイナの図書館</li>
+          <li>ロボトミーコーポレーション</li>
+          <li>錆びた湖シリーズ</li>
+          <li>ホロウナイト</li>
+          <li>9ソル</li>
+          <li>エンダーリリー</li>
+          <li>ハーデス1と2</li>
+          <li>死んだ細胞</li>
+          <li>AAA...</li>
+        </ul>
+      </div>
+
+      <h2 class="toggler" id="misc-toggle">コンピューター関連:</h2>
+      <div class="block" id="misc">
+        <ul>
+          <li>アーチリナックス</li>
+          <li>nginx HTTP server</li>
+        </ul>
+      </div>
+
+    <h1 class="toggler" id="computer-toggle">コンピュータシステム:</h1>
+    <div class="block" id="computer">
+      <a class="toggler" onclick="fold_all()">△ 戻る</a>
+      <ul>
+        <li>2019-今: カスタム DELL Inspiration (1tb ssd, 24gb ram, intel iris, i5 gen 11th)</li>
+        <li>2012-05: ASUS (pentium 500, 2gb ram, intel family)</li>
+        <li>失われた記憶 (386, 486, Pentium, etc)</li>
+      </ul>
+    </div>
+
+    <table id="sig">
+      <tr>
+        <td><img alt="no-spam" width="110" height="30" src="image/no-spam.png"/></td>
+        <td rowspan="2"><img alt="water-rabbit" width="56px" height="57px" src="image/favicon.png"/></td>
+      </tr>
+      <tr>
+        <td>Crovo (黒見たま)</td>
+      </tr>
+    </table>
+
+    <hr/>
+
+    <div>&copy; 2020 CROVOIC.NET <br></br>
+        This website is based from godfat.org
+    </div>
+
+    <div>
+
+      <p>
+        <a href="https://validator.w3.org/markup/check?uri=referer"><img
+          src="https://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" /></a>
+      
+
+          <a href="http://jigsaw.w3.org/css-validator/check/referer">
+              <img style="border:0;width:88px;height:31px"
+                  src="http://jigsaw.w3.org/css-validator/images/vcss"
+                  alt="Valid CSS!" />
+          </a>
+      </p>
+                  
+    </div>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"/>
+    <script type="text/javascript" src="script1.js"/>
+  </body>
+</html>
